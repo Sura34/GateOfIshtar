@@ -66,12 +66,28 @@ def calculate_damage_taken(date, champion):
         return 0
 
 def holly_day(date):
-    return False
+    # Tuesday and Thursday are the only holly days
+    if date.weekday() == 1 or date.weekday() == 3:
+        return True
+    else:
+        return False
 
 def invincible_champion(champion):
     if champion == 'Wizard':
         return True
     if champion == 'Spirit':
         return True
-    if champion == 'human' or champion == 'giant' or champion == 'vampire':
+    if champion == 'Human' or champion == 'Giant' or champion == 'Vampire':
         return False
+
+if __name__ == '__main__':
+    # Champions initial health
+    init_health = {'Human': 100, 'Wizard': 100, 'Spirit': 100, 'Giant': 150, 'Vampire': 110}
+    date = ["2018-04-16 06:12", "2018-04-18 13:11", "2018-04-28 8:11"]
+    for champion in init_health:
+        total_damage = calculate_champion_health(champion, date)
+        life_left = init_health[champion] - total_damage
+        if life_left <= 0:
+            print("{} is Dead".format(champion))
+        else:
+            print("{} has {}HP left ".format(champion, life_left))
