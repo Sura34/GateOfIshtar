@@ -27,6 +27,9 @@ def calculate_champion_health(champion, date_string_intervals):
             total_damage += next_damage
 
     return total_damage
+    initial_health = init_health(champion)
+    remaining_health = initial_health - total_damage
+    return remaining_health
 
 
 def calculate_damage_taken(date, champion):
@@ -51,7 +54,7 @@ def calculate_damage_taken(date, champion):
     elif (date.hour == 15 and date.minute >= 0 and date.minute <= 29):
         return 13
     # "Brand" god of fire spawned
-    elif (date.hour == 15 and date.minute >= 0 or date.hour == 16 and date.minute <= 59):
+    elif (date.hour == 15 and date.minute >= 30 or date.hour == 16 and date.minute <= 59):
         return 25
     # "Rumble" god of lightning spawned
     elif (date.hour == 17 and date.minute >= 0 and date.minute <= 59):
